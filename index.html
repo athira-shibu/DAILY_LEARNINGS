@@ -7,7 +7,170 @@
     <link rel="stylesheet" href="global.css"></link>
 </head>
 <body>
-    <h1>Athira Shibu</h1>
-    <p>Back End Developer</p>
+    <!-- <h1>Catch your cutie...</h1>
+    <p>Back End Developer</p> -->
+    <!-- Question Prompt Box -->
+    <!-- <div class="prompt-box frame-content">
+        <h2>Question:</h2>
+        <p id="question">1 + 1 = ?</p>
+    </div> -->
+        <div class="keyboard-align">
+            <h1>Catch your cutie..</h1>
+            <div class="keyboard">
+                <div class="key">1</div>
+                <div class="key">2</div>
+                <div class="key">3</div>
+                <div class="key">4</div>
+                <div class="key">5</div>
+                <div class="key">6</div>
+                <div class="key">7</div>
+                <div class="key">8</div>
+                <div class="key">9</div>
+                <div class="key">0</div>
+
+                <div class="key">Q</div>
+                <div class="key">W</div>
+                <div class="key">E</div>
+                <div class="key">R</div>
+                <div class="key">T</div>
+                <div class="key">Y</div>
+                <div class="key">U</div>
+                <div class="key">I</div>
+                <div class="key">O</div>
+                <div class="key">P</div>
+                <div class="key">A</div>
+                <div class="key">S</div>
+                <div class="key">D</div>
+                <div class="key">F</div>
+                <div class="key">G</div>
+                <div class="key">H</div>
+                <div class="key">J</div>
+                <div class="key">K</div>
+                <div class="key">L</div>
+                <div class="key">Z</div>
+                <div class="key">X</div>
+                <div class="key">C</div>
+                <div class="key">V</div>
+                <div class="key">B</div>
+                <div class="key">N</div>
+                <div class="key">M</div>
+            </div>
+        <!-- </div> -->
+    </div>
+
+    <script>
+        document.querySelectorAll('.key').forEach(key => {
+          key.addEventListener('click', (event) => {
+            const numParticles = 12; // Number of firework particles
+            for (let i = 0; i < numParticles; i++) {
+              const particle = document.createElement('div');
+              particle.classList.add('firework-particle');
+    
+              // Randomized color for fireworks
+              const colors = ['red', 'yellow', 'blue', 'green', 'purple', 'orange'];
+              particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    
+              // Randomize the direction of each particle
+              const angle = (i / numParticles) * 360; // Spread particles evenly in a circle
+              const x = Math.cos((angle * Math.PI) / 180) * 100; // X movement
+              const y = Math.sin((angle * Math.PI) / 180) * 100; // Y movement
+    
+              particle.style.setProperty('--x', `${x}px`);
+              particle.style.setProperty('--y', `${y}px`);
+    
+              // Position the particle in the center of the clicked key
+              const rect = event.target.getBoundingClientRect();
+              particle.style.left = `${rect.width / 2}px`;
+              particle.style.top = `${rect.height / 2}px`;
+    
+              // Add the particle to the key
+              event.target.appendChild(particle);
+    
+              // Remove the particle after animation
+              setTimeout(() => {
+                particle.remove();
+              }, 1000); // Matches animation duration
+            }
+          });
+        });
+
+        // cartoon character
+         // Create a cartoon character
+        const character = document.createElement('div');
+        character.classList.add('character');
+        
+        // Select all keys
+        const keys = document.querySelectorAll('.key');
+        const keyboard = document.querySelector('.keyboard');
+        
+        // Randomly place the character on a key initially
+        function placeCharacter() {
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        randomKey.appendChild(character);
+        character.style.left = '10px';
+        character.style.top = '10px';
+        }
+
+        // Move character to a random key
+        function moveCharacter() {
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        const rect = randomKey.getBoundingClientRect();
+        character.style.left = `${rect.width / 2}px`;
+        character.style.top = `${rect.height / 2}px`;
+        randomKey.appendChild(character);
+        }
+
+        // Add event listener to make the character run away
+        character.addEventListener('mouseenter', moveCharacter);
+
+        // Initial placement
+        placeCharacter();
+
+        //  query set up
+
+        // Predefined questions and answers
+        const query_keys = document.querySelectorAll('.key');
+        const questionElement = document.getElementById('question');
+        const query_character = document.createElement('div');
+        query_character.classList.add('character');
+
+        // Predefined questions and answers
+        const questions = [
+        { question: '1 + 1 = ?', answer: '2' },
+        { question: '2 + 2 = ?', answer: '4' },
+        { question: '3 + 3 = ?', answer: '6' },
+        { question: '5 - 2 = ?', answer: '3' },
+        ];
+
+        let currentQuestionIndex = 0;
+
+        // Function to update the question and position the character
+        function updateQuestion() {
+        const currentQuestion = questions[currentQuestionIndex];
+        questionElement.textContent = currentQuestion.question;
+
+        // Find the correct key for the answer
+        query_keys.forEach((key) => {
+            if (key.textContent === currentQuestion.answer) {
+            key.appendChild(query_character); // Add character to the correct key
+            }
+        });
+        }
+
+                // Event listener for each key
+        query_keys.forEach((key) => {
+        key.addEventListener('click', () => {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (key.textContent === currentQuestion.answer) {
+            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length; // Move to next question
+            updateQuestion();
+            }
+        });
+        });
+
+        // Initialize the first question
+        updateQuestion();
+
+      </script>
 </body>
 </html>
